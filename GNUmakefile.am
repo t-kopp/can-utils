@@ -42,13 +42,16 @@ bin_PROGRAMS = \
 	can-calc-bit-timing \
 	canbusload \
 	candump \
+	canecho \
 	canfdtest \
 	cangen \
 	cangw \
 	canlogserver \
 	canplayer \
+	canpump \
 	cansend \
 	cansniffer \
+	gwtest \
 	isotpdump \
 	isotpperf \
 	isotprecv \
@@ -65,7 +68,29 @@ bin_PROGRAMS = \
 	slcan_attach \
 	slcand \
 	slcanpty \
-	testj1939
+	testj1939 \
+	tst-bcm-cycle \
+	tst-bcm-dump \
+	tst-bcm-filter \
+	tst-bcm-rtr \
+	tst-bcm-rx-sendto \
+	tst-bcm-single \
+	tst-bcm-throttle \
+	tst-bcm-tx-sendto \
+	tst-bcm-tx_delete \
+	tst-bcm-tx_read \
+	tst-bcmfd-cycle \
+	tst-bcmfd-filter \
+	tst-err \
+	tst-filter \
+	tst-filter-master \
+	tst-filter-server \
+	tst-packet \
+	tst-proc \
+	tst-raw \
+	tst-raw-filter \
+	tst-raw-sendto \
+	tst-rcv-own-msgs
 
 jacd_LDADD = libj1939.la
 jcat_LDADD = libj1939.la
@@ -79,7 +104,9 @@ EXTRA_DIST = \
 	README.md \
 	autogen.sh \
 	can-j1939-kickstart.md \
-	can-j1939.md
+	can-j1939.md \
+	test_netlayer.sh \
+	tst-filter-server.result
 
 MAINTAINERCLEANFILES = \
 	configure \

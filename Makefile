@@ -1,5 +1,5 @@
 #
-#  Copyright (c) 2002-2005 Volkswagen Group Electronic Research
+#  Copyright (c) 2002-2007 Volkswagen Group Electronic Research
 #  All rights reserved.
 #
 #  Redistribution and use in source and binary forms, with or without
@@ -48,6 +48,7 @@ CFLAGS := -O2 -Wall -Wno-parentheses
 CPPFLAGS += \
 	-Iinclude \
 	-DAF_CAN=PF_CAN \
+	-DETH_P_CAN=0x000C \
 	-DPF_CAN=29 \
 	-DSO_RXQ_OVFL=40 \
 	-D_FILE_OFFSET_BITS=64 \
@@ -76,11 +77,39 @@ PROGRAMS_SLCAN := \
 	slcan_attach \
 	slcand
 
+PROGRAMS_TEST := \
+	canecho \
+	canpump \
+	gwtest \
+	tst-bcm-cycle \
+	tst-bcm-dump \
+	tst-bcm-filter \
+	tst-bcm-rtr \
+	tst-bcm-rx-sendto \
+	tst-bcm-single \
+	tst-bcm-throttle \
+	tst-bcm-tx-sendto \
+	tst-bcm-tx_delete \
+	tst-bcm-tx_read \
+	tst-bcmfd-cycle \
+	tst-bcmfd-filter \
+	tst-err \
+	tst-filter \
+	tst-filter-master \
+	tst-filter-server \
+	tst-packet \
+	tst-proc \
+	tst-raw \
+	tst-raw-filter \
+	tst-raw-sendto \
+	tst-rcv-own-msgs
+
 PROGRAMS := \
 	$(PROGRAMS_CANGW) \
 	$(PROGRAMS_ISOTP) \
 	$(PROGRAMS_J1939) \
 	$(PROGRAMS_SLCAN) \
+	$(PROGRAMS_TEST) \
 	asc2log \
 	bcmserver \
 	can-calc-bit-timing \
@@ -114,6 +143,7 @@ candump.o:	lib.h
 cangen.o:	lib.h
 canlogserver.o:	lib.h
 canplayer.o:	lib.h
+canpump.o:	lib.h
 cansend.o:	lib.h
 log2asc.o:	lib.h
 log2long.o:	lib.h
@@ -129,6 +159,7 @@ candump:	candump.o	lib.o
 cangen:		cangen.o	lib.o
 canlogserver:	canlogserver.o	lib.o
 canplayer:	canplayer.o	lib.o
+canpump:	canpump.o	lib.o
 cansend:	cansend.o	lib.o
 log2asc:	log2asc.o	lib.o
 log2long:	log2long.o	lib.o

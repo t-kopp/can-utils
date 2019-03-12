@@ -42,13 +42,19 @@ set(PROGRAMS_J1939
     testj1939
 )
 
+set(PROGRAMS_CANLIB_RECVMMSG
+    canpump
+)
+
 set(PROGRAMS
     ${PROGRAMS_CANLIB}
     bcmserver
     can-calc-bit-timing
+    canecho
     canfdtest
     cangw
     cansniffer
+    gwtest
     isotpdump
     isotpperf
     isotprecv
@@ -59,10 +65,34 @@ set(PROGRAMS
     slcan_attach
     slcand
     slcanpty
+    tst-bcm-cycle
+    tst-bcm-dump
+    tst-bcm-filter
+    tst-bcm-rtr
+    tst-bcm-rx-sendto
+    tst-bcm-single
+    tst-bcm-throttle
+    tst-bcm-tx-sendto
+    tst-bcm-tx_delete
+    tst-bcm-tx_read
+    tst-bcmfd-cycle
+    tst-bcmfd-filter
+    tst-err
+    tst-filter
+    tst-filter-master
+    tst-filter-server
+    tst-packet
+    tst-proc
+    tst-raw
+    tst-raw-filter
+    tst-raw-sendto
+    tst-rcv-own-msgs
 )
 
 if(NOT ANDROID)
   list(APPEND PROGRAMS ${PROGRAMS_J1939})
+  list(APPEND PROGRAMS ${PROGRAMS_CANLIB_RECVMMSG})
+  list(APPEND PROGRAMS_CANLIB ${PROGRAMS_CANLIB_RECVMMSG})
 
   add_library(j1939 STATIC
       libj1939.c
