@@ -1,0 +1,3 @@
+#ifndef _LINUX_BITFIELD_H
+#define _LINUX_BITFIELD_H
+#endif /* _LINUX_BITFIELD_H */

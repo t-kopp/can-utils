@@ -14,6 +14,7 @@ noinst_HEADERS = \
 	lib.h \
 	libj1939.h \
 	terminal.h \
+	include/linux/bitfield.h \
 	include/linux/can.h \
 	include/linux/can/bcm.h \
 	include/linux/can/error.h \
@@ -24,6 +25,7 @@ noinst_HEADERS = \
 	include/linux/can/raw.h \
 	include/linux/can/vxcan.h \
 	include/linux/errqueue.h \
+	include/linux/kernel.h \
 	include/linux/net_tstamp.h \
 	include/linux/netlink.h
 
@@ -37,6 +39,11 @@ libcan_la_SOURCES = \
 
 libj1939_la_SOURCES = \
 	libj1939.c
+
+mcp25xxfd_dump_SOURCES = \
+	mcp25xxfd/mcp25xxfd-dump-main.c \
+	mcp25xxfd/mcp25xxfd-dump.c \
+	mcp25xxfd/mcp25xxfd.h
 
 bin_PROGRAMS = \
 	asc2log \
@@ -64,6 +71,7 @@ bin_PROGRAMS = \
 	j1939sr \
 	log2asc \
 	log2long \
+	mcp25xxfd-dump \
 	slcan_attach \
 	slcand \
 	slcanpty \
