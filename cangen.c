@@ -70,6 +70,8 @@
 #define MODE_RANDOM	0
 #define MODE_INCREMENT	1
 #define MODE_FIX	2
+#define MODE_RANDOM_EVEN	3
+#define MODE_RANDOM_ODD	4
 
 extern int optind, opterr, optopt;
 
@@ -109,6 +111,8 @@ void print_usage(char *prg)
 		"printing sent CAN frames)\n\n");
 	fprintf(stderr, "Generation modes:\n");
 	fprintf(stderr, " 'r'         => random values (default)\n");
+	fprintf(stderr, " 'e'         => random values, even ID\n");
+	fprintf(stderr, " 'o'         => random values, odd ID\n");
 	fprintf(stderr, " 'i'         => increment values\n");
 	fprintf(stderr, " <hexvalue>  => fix value using <hexvalue>\n\n");
 	fprintf(stderr, "When incrementing the CAN data the data length code "
@@ -211,6 +215,10 @@ int main(int argc, char **argv)
 				id_mode = MODE_RANDOM;
 			} else if (optarg[0] == 'i') {
 				id_mode = MODE_INCREMENT;
+			} else if (optarg[0] == 'e') {
+				id_mode = MODE_RANDOM_EVEN;
+			} else if (optarg[0] == 'o') {
+				id_mode = MODE_RANDOM_ODD;
 			} else {
 				id_mode = MODE_FIX;
 				frame.can_id = strtoul(optarg, NULL, 16);
@@ -376,8 +384,13 @@ int main(int argc, char **argv)
 			maxdlen = CAN_MAX_DLEN;
 		}
 
-		if (id_mode == MODE_RANDOM)
+		if (id_mode == MODE_RANDOM) {
 			frame.can_id = random();
+		} else if (id_mode == MODE_RANDOM_EVEN) {
+			frame.can_id = random() & 0xFFFFFFFE;
+		} else if (id_mode == MODE_RANDOM_ODD) {
+			frame.can_id = random() | 0x1;
+		}
 
 		if (extended) {
 			frame.can_id &= CAN_EFF_MASK;
