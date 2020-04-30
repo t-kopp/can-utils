@@ -203,7 +203,7 @@ static int check_frame(const struct can_frame *frame)
 {
 	int err = 0;
 	int i;
-	
+
 	if (frame->can_id != CAN_MSG_ID) {
 		printf("unexpected Message ID 0x%04x!\n", frame->can_id);
 		err = -1;
@@ -213,9 +213,9 @@ static int check_frame(const struct can_frame *frame)
 		printf("unexpected Message length %d!\n", frame->can_dlc);
 		err = -1;
 	}
-	
+
 	for (i = 1; i < frame->can_dlc; i++) {
-		if (frame->data[i] != frame->data[i-1]) {
+		if (frame->data[i] != ((frame->data[i-1] + 1) & 0xFF)) {
 			printf("Frame inconsistent!\n");
 			print_frame(frame, 0);
 			err = -1;
